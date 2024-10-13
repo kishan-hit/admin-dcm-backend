@@ -4,6 +4,8 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const AuthRouter = require('./Routes/AuthRouter');
 
+const Fileparser = require('./Fileparser');
+
 require('dotenv').config();
 require('./Models/Db');
 const PORT = process.env.PORT || 8080;
@@ -35,7 +37,7 @@ const storage = multer.diskStorage({
 const ApplicantModel = require('./Models/Applicant');
 const { status } = require('express/lib/response');
 
-app.post("/post-application",upload.single("resume"), async(req,res) => {
+app.post("/post-application",Fileparser("resume"), async(req,res) => {
     const role = req.body.role;
     const name = req.body.name;
     const email = req.body.email;
