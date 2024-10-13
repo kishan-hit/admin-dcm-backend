@@ -56,6 +56,14 @@ app.post("/post-application",upload.single("resume"), async(req,res) => {
     }
 })
 
+app.get('/health', (req, res) => {
+  res.status(200).json({
+      status: 'UP',
+      message: 'Server is healthy',
+      timestamp: new Date().toISOString()
+  });
+});
+
 
 app.listen(PORT, () => {
     console.log(`Server is running on ${PORT}`)
